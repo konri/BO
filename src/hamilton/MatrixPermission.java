@@ -48,7 +48,8 @@ public class MatrixPermission
 
 		matrixPermission = tmp;
 
-	}
+	} 
+	
 	public static String toPrint()
 	{
 		String tmpString = "____________________________\n";
