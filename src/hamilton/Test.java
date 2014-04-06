@@ -46,7 +46,13 @@ public class Test {
 		
 		System.out.print("permission:" + 		NodeManager.getPermission(1, 1));
 		
-		System.out.print(MatrixPermission.toPrint());
+		//System.out.print(MatrixPermission.toPrint());
+		
+		System.out.println();
+		
+		Population testPopulacji = new Population(10, true);
+		System.out.print(testPopulacji);
+		
 	}
 	
 	
