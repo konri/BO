@@ -7,10 +7,9 @@ public class Tour {
 	private ArrayList<Node> tour = new ArrayList<Node>();
 
 	public Tour() {
-
-		// TODO: Czy nie usunac tego tutaj i w generateRandomize zamiast set dac
-		// add. Bo tutaj jest nie potrzebna petla??
-
+		/*
+		 * we create tour of nulls because of crossword algorithm
+		 */
 		for (int i = 0; i < NodeManager.getSizeOfNodes(); i++) {
 			tour.add(null);
 		}
@@ -44,16 +43,24 @@ public class Tour {
 		return tour.get(indexTour);
 	}
 	
+	
 	public int getSize()
 	{
 		return tour.size();
 	}
 	
+	
+	public boolean containsNode(Node node)
+	{
+		return tour.contains(node);
+	}
+	
+	
 	public String toString(){
 		String tmp ="";
 		for(int i= 0; i < getSize(); i++)
 			if(i < getSize() - 1)
-				tmp += NodeManager.getIdNodeByRefernce(getNode(i)) + "->";
+				tmp += NodeManager.getIdNodeByRefernce(getNode(i)) + "=>";
 			else
 				tmp += NodeManager.getIdNodeByRefernce(getNode(i)) + "\n";
 		

@@ -1,5 +1,7 @@
 package hamilton;
 
+import java.util.Random;
+
 public class Test {
 
 	public static void main(String[] args)
@@ -20,21 +22,7 @@ public class Test {
 		NodeManager.addNode(node6);
 		Node node7 = new Node();
 		NodeManager.addNode(node7);
-		Node node8 = new Node();
-		NodeManager.addNode(node8);
-		Node node9 = new Node();
-		NodeManager.addNode(node9);
-		Node node10 = new Node();
-		NodeManager.addNode(node10);
-		Node node11 = new Node();
-		NodeManager.addNode(node11);
-		Node node12 = new Node();
-		NodeManager.addNode(node12);
-		Node node13 = new Node();
-		NodeManager.addNode(node13);
-		Node node14 = new Node();
-		NodeManager.addNode(node14);
-		
+
 		
 		
 		
@@ -51,6 +39,14 @@ public class Test {
 		System.out.println();
 		
 		Population testPopulacji = new Population(10, true);
+		Random rand = new Random();
+		
+		System.out.println("Rodzic1: " + testPopulacji.getTour(3));
+		System.out.println("Rodzic2: " + testPopulacji.getTour(5));
+		System.out.println("Child:   " + GeneticAlgorithm.crossOver(testPopulacji.getTour(3), testPopulacji.getTour(5)));
+		
+		
+		
 		System.out.print(testPopulacji);
 		
 	}
