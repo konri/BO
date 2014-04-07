@@ -26,7 +26,22 @@ public class Population {
 	public void setTour(int index, Tour tour) {
 		tours[index] = tour;
 	}
-
+	
+	public void deleteTour(int index)
+	{
+		//tours[index] = null;
+		for(int i = index; i < (getSize() - 1); i++)
+		{
+			tours[index] = tours[index+1];
+		}
+		tours[getSize() - 1 ] = null;
+	}
+	
+	
+	public int getSize()
+	{
+		return tours.length;
+	}
 	public String toString()
 	{
 		String tmp = "";

@@ -60,6 +60,20 @@ public class Tour {
 		return tour.contains(node);
 	}
 	
+	/*
+	 * return true if tours the same
+	 * return false if tours are different
+	 */
+	public boolean compareTours(Tour tour)
+	{
+		
+		for(int i = 0; i < getSize(); i++)
+		{
+			if(this.getNode(i) != tour.getNode(i))
+				return false;
+		}
+		return true;
+	}
 	
 	public String toString(){
 		String tmp ="";

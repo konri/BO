@@ -2,11 +2,59 @@ package hamilton;
 
 import java.util.Random;
 
+import javax.swing.text.StyleContext.SmallAttributeSet;
+
 public class GeneticAlgorithm {
 
 	private static double mutationRate = 0.1;
-	
-	
+	private static int amountGoodPath = 0;
+	private static boolean fullPopulation = false;
+
+	public static Population solvePopulation(Population population) {
+		Population tmpPopulation = new Population(population.getSize(), false);
+
+		for (int i = 0; i < population.getSize(); i++){
+			if (checkHamilton(population.getTour(i))) {
+				if (amountGoodPath < tmpPopulation.getSize()) {
+					tmpPopulation.setTour(amountGoodPath, population.getTour(i));
+					amountGoodPath++;
+				}
+				else
+				{
+					fullPopulation = true;
+				}
+			}
+		}
+
+		// check if there are duplicates in population.
+		int index = 0;
+		while (index < amountGoodPath) {
+			for (int i = index; i < amountGoodPath; i++) {
+				// true if tours are the same
+				if (tmpPopulation.getTour(index).compareTours(
+						tmpPopulation.getTour(i))) {
+					tmpPopulation.deleteTour(i);
+					amountGoodPath--;
+				}
+			}
+		}
+		for(int k = amountGoodPath; k < tmpPopulation.getSize(); k++)
+		{
+			//get randomly parent1 and parent 2 from old population
+			Tour parent1 = getRandomTour(population);
+			Tour parent2 = getRandomTour(population);
+			//create child with crossover
+			Tour child = crossOver(parent1, parent2);
+			//set new tour to new population
+			tmpPopulation.setTour(k, child);
+		}
+		for(int k = amountGoodPath; k < tmpPopulation.getSize(); k++)
+			mutation(tmpPopulation.getTour(k));
+		
+		return tmpPopulation;
+			
+	}
+
 	public static Tour crossOver(Tour parent1, Tour parent2) {
 		int startPos; // start position of substitution nodes in new child
 		int endPos; // end position
@@ -51,28 +99,35 @@ public class GeneticAlgorithm {
 		return child;
 
 	}
-	
+
 	/*
-	 * Mutation tour 
-	 * swap two nodes if possibility will be lesser than mutationRate(10%). 
-	 * 
+	 * Mutation tour swap two nodes if possibility will be lesser than
+	 * mutationRate(10%).
 	 */
-	public static void mutation(Tour tour)
-	{
+	public static void mutation(Tour tour) {
 		Random rand = new Random();
-		for(int i = 0; i < tour.getSize(); i++)
-		{
-			if(rand.nextDouble() < mutationRate)
-			{
-				int randomSecond = rand.nextInt(tour.getSize());// generate second index of swaping node. 
-				Node node1 = tour.getNode(i); 
+		for (int i = 0; i < tour.getSize(); i++) {
+			if (rand.nextDouble() < mutationRate) {
+				int randomSecond = rand.nextInt(tour.getSize());// generate
+																// second index
+																// of swaping
+																// node.
+				Node node1 = tour.getNode(i);
 				Node node2 = tour.getNode(randomSecond);
-				
-				//swap between two nodes.
+
+				// swap between two nodes.
 				tour.setNode(i, node2);
 				tour.setNode(randomSecond, node1);
 			}
 		}
 	}
-
+	
+	/*
+	 * Get random tour from population
+	 */
+	private static Tour getRandomTour(Population population)
+	{
+		Random rand = new Random();
+		return population.getTour(rand.nextInt(population.getSize()));
+	}
 }
