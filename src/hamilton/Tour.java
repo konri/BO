@@ -15,6 +15,7 @@ public class Tour {
 		}
 	}
 
+	
 	public Tour(ArrayList<Node> tour) {
 		this.tour = tour;
 	}
@@ -49,6 +50,10 @@ public class Tour {
 		return tour.size();
 	}
 	
+	public ArrayList<Node> getTour()
+	{
+		return tour;
+	}
 	
 	public boolean containsNode(Node node)
 	{

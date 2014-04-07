@@ -4,6 +4,9 @@ import java.util.Random;
 
 public class GeneticAlgorithm {
 
+	private static double mutationRate = 0.1;
+	
+	
 	public static Tour crossOver(Tour parent1, Tour parent2) {
 		int startPos; // start position of substitution nodes in new child
 		int endPos; // end position
@@ -26,7 +29,7 @@ public class GeneticAlgorithm {
 			endPos = startPos;
 			startPos = tmp;
 		}
-		System.out.println("Start: " + startPos + " End: " + endPos);
+
 		/*
 		 * Put Node to child which we choose from parent1
 		 */
@@ -44,9 +47,32 @@ public class GeneticAlgorithm {
 				child.setNode(j, parent2.getNode(p));
 			}
 		}
-		System.out.println();
+
 		return child;
 
+	}
+	
+	/*
+	 * Mutation tour 
+	 * swap two nodes if possibility will be lesser than mutationRate(10%). 
+	 * 
+	 */
+	public static void mutation(Tour tour)
+	{
+		Random rand = new Random();
+		for(int i = 0; i < tour.getSize(); i++)
+		{
+			if(rand.nextDouble() < mutationRate)
+			{
+				int randomSecond = rand.nextInt(tour.getSize());// generate second index of swaping node. 
+				Node node1 = tour.getNode(i); 
+				Node node2 = tour.getNode(randomSecond);
+				
+				//swap between two nodes.
+				tour.setNode(i, node2);
+				tour.setNode(randomSecond, node1);
+			}
+		}
 	}
 
 }

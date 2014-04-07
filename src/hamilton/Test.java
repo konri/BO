@@ -44,8 +44,8 @@ public class Test {
 		System.out.println("Rodzic1: " + testPopulacji.getTour(3));
 		System.out.println("Rodzic2: " + testPopulacji.getTour(5));
 		System.out.println("Child:   " + GeneticAlgorithm.crossOver(testPopulacji.getTour(3), testPopulacji.getTour(5)));
-		
-		
+		GeneticAlgorithm.mutation(testPopulacji.getTour(5));
+		System.out.println("muttation: " + testPopulacji.getTour(5));
 		
 		System.out.print(testPopulacji);
 		
