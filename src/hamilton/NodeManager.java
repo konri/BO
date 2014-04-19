@@ -21,18 +21,18 @@ public class NodeManager {
 	 */
 	public static void addNode(Node node) {
 		containsNode.add(node);
-		MatrixPermission.addNode(getSizeOfNodes());
+		MatrixPermission.addNode(getSizeOfNodes());  // TODO: optimization we can add to check there if matrix can hanlde more perrmision. 
 	}
 
 	/*
-	 * Get Node by index.
+	 * Get Node reference by index.
 	 */
 	public static Node getReferenceNodeByIndex(int index) {
 		return containsNode.get(index);
 	}
 
 	/*
-	 * Get index of node.
+	 * Get integer id of node.
 	 */
 	public static int getIdNodeByRefernce(Node node) {
 		return containsNode.indexOf(node);
@@ -45,6 +45,7 @@ public class NodeManager {
 		return containsNode.size();
 	}
 
+	//TODO: Check if it's necessary we can use MatrixPermission class!
 	/*
 	 * add permission to current path
 	 */

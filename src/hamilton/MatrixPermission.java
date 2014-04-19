@@ -2,8 +2,9 @@ package hamilton;
 
 public class MatrixPermission {
 
+	private static boolean isReady = false;
 	private static int[][] matrixPermission = new int[10][10];
-
+	
 	public static void addNode(int lastIndex) {
 		if (lastIndex > matrixPermission.length)
 			expandMatrix();
@@ -47,7 +48,17 @@ public class MatrixPermission {
 		matrixPermission = tmp;
 
 	}
-
+	
+	public static void setReady()
+	{
+		isReady = true;
+	}
+	
+	public static boolean getReady()
+	{
+		return isReady;
+	}
+	
 	public static String toPrint() {
 		String tmpString = "____________________________\n";
 		for (int i = 0; i < matrixPermission.length; i++) {
@@ -60,5 +71,22 @@ public class MatrixPermission {
 		return tmpString;
 
 	}
+	//TODO:
+	public static void randomPermission()
+	{
+		
+	}
+	
+	public static void allPermission()
+	{
+		for(int i = 0; i < matrixPermission.length; i++)
+			for(int j=0; j< matrixPermission[i].length; j++)
+			{
+				if(i!=j)
+					addPermission(i, j);
+			}
+	}
+	
+	
 
 }

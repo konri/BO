@@ -19,7 +19,10 @@ public class Population {
 		}
 	}
 
-	public Tour getTour(int index) {
+	public Tour getTour(int index) throws ArrayIndexOutOfBoundsException {
+		if(index < 0 || index >= amountPopulation)
+			throw new ArrayIndexOutOfBoundsException();
+		
 		return tours[index];
 	}
 
@@ -42,6 +45,7 @@ public class Population {
 	{
 		return tours.length;
 	}
+	
 	public String toString()
 	{
 		String tmp = "";

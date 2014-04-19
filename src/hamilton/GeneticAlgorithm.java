@@ -7,52 +7,57 @@ import javax.swing.text.StyleContext.SmallAttributeSet;
 public class GeneticAlgorithm {
 
 	private static double mutationRate = 0.1;
-	private static int amountGoodPath = 0;
-	private static boolean fullPopulation = false;
+	public static int amountGoodPath = 0;
+	private static boolean isFullPopulation = false;
 
 	public static Population solvePopulation(Population population) {
 		Population tmpPopulation = new Population(population.getSize(), false);
-
-		for (int i = 0; i < population.getSize(); i++){
-			if (checkHamilton(population.getTour(i))) {
-				if (amountGoodPath < tmpPopulation.getSize()) {
+	
+		
+		if (amountGoodPath < tmpPopulation.getSize()) {
+			for (int i = 0; i < population.getSize(); i++) {
+				if (HamiltonAlgorithm.checkHamilton(population.getTour(i))) {
 					tmpPopulation.setTour(amountGoodPath, population.getTour(i));
 					amountGoodPath++;
 				}
-				else
-				{
-					fullPopulation = true;
-				}
 			}
+		} else {
+		System.out.print("full");
+		isFullPopulation = true;
+		tmpPopulation = population;
 		}
+		
+		
 
 		// check if there are duplicates in population.
-		int index = 0;
-		while (index < amountGoodPath) {
-			for (int i = index; i < amountGoodPath; i++) {
-				// true if tours are the same
-				if (tmpPopulation.getTour(index).compareTours(
-						tmpPopulation.getTour(i))) {
-					tmpPopulation.deleteTour(i);
-					amountGoodPath--;
-				}
-			}
-		}
-		for(int k = amountGoodPath; k < tmpPopulation.getSize(); k++)
-		{
-			//get randomly parent1 and parent 2 from old population
+//		int index = 0;
+//		while (index < amountGoodPath) {
+//			for (int i = index; i < amountGoodPath; i++) {
+//				// true if tours are the same
+//				if (tmpPopulation.getTour(index).compareTours(
+//						tmpPopulation.getTour(i))) {
+//					tmpPopulation.deleteTour(i);
+//					amountGoodPath--;
+//				}
+//			}
+//		}
+		
+			
+		
+		for (int k = amountGoodPath  ; k < tmpPopulation.getSize(); k++) {
+			// get randomly parent1 and parent 2 from old population
 			Tour parent1 = getRandomTour(population);
 			Tour parent2 = getRandomTour(population);
-			//create child with crossover
+			// create child with crossover
 			Tour child = crossOver(parent1, parent2);
-			//set new tour to new population
+			// set new tour to new population
 			tmpPopulation.setTour(k, child);
 		}
-		for(int k = amountGoodPath; k < tmpPopulation.getSize(); k++)
+		for (int k = amountGoodPath ; k < tmpPopulation.getSize(); k++)
 			mutation(tmpPopulation.getTour(k));
 		
 		return tmpPopulation;
-			
+
 	}
 
 	public static Tour crossOver(Tour parent1, Tour parent2) {
@@ -121,13 +126,17 @@ public class GeneticAlgorithm {
 			}
 		}
 	}
-	
+
 	/*
 	 * Get random tour from population
 	 */
-	private static Tour getRandomTour(Population population)
-	{
+	private static Tour getRandomTour(Population population) {
 		Random rand = new Random();
 		return population.getTour(rand.nextInt(population.getSize()));
+	}
+	
+	public static boolean isFull()
+	{
+		return isFullPopulation;
 	}
 }
