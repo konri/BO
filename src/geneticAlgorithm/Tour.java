@@ -1,4 +1,7 @@
-package hamilton;
+package geneticAlgorithm;
+
+import graph.Node;
+import graph.NodeManager;
 
 import java.util.ArrayList;
 import java.util.Collections;

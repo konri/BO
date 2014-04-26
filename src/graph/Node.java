@@ -1,4 +1,4 @@
-package hamilton;
+package graph;
 
 import java.util.Random;
 

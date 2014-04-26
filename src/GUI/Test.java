@@ -1,4 +1,13 @@
-package hamilton;
+package GUI;
+
+import exceptions.GeneticAlgorithmExeptions;
+import geneticAlgorithm.GeneticAlgorithm;
+import geneticAlgorithm.Population;
+import geneticAlgorithm.Tour;
+import graph.Node;
+import graph.NodeManager;
+import hamiltonAlgorithm.HamiltonAlgorithm;
+import hamiltonAlgorithm.MatrixPermission;
 
 import java.util.Random;
 
@@ -27,18 +36,21 @@ public class Test {
 		MatrixPermission.addPermission(0,4);
 		MatrixPermission.addPermission(1,2 );
 		MatrixPermission.addPermission(2,4 );
+		MatrixPermission.addPermission(2,3 );
 		MatrixPermission.addPermission(4,3 );
 		MatrixPermission.addPermission(4,6);
 		MatrixPermission.addPermission(3,6 );
 		MatrixPermission.addPermission(3,5 );
 		MatrixPermission.addPermission(5,7 );
+		MatrixPermission.addPermission(7,4 );
+		MatrixPermission.addPermission(5,2 );
 		MatrixPermission.addPermission(6,7 );
-		MatrixPermission.addPermission(4,3 );
-		MatrixPermission.addPermission(1,3 );
-		MatrixPermission.addPermission(2,8 );
-		MatrixPermission.addPermission(6,4 );
-		MatrixPermission.addPermission(8,9 );
-		MatrixPermission.allPermission();
+//		MatrixPermission.addPermission(4,3 );
+//		MatrixPermission.addPermission(1,3 );
+//		MatrixPermission.addPermission(2,8 );
+//		MatrixPermission.addPermission(6,4 );
+//		MatrixPermission.addPermission(8,9 );
+		//MatrixPermission.allPermission();
 		
 		System.out.print(MatrixPermission.toPrint());
 		
@@ -85,14 +97,21 @@ public class Test {
 //		
 //		System.out.print(testPopulacji);
 //		
+	
+/******************* Test population *************************/		
 		
 		System.out.println();
-		for(int i =0; i < 10000; i++)
+		for(int i =0; i < 10; i++)
 			if(!GeneticAlgorithm.isFull()){
-				testPopulacji  = GeneticAlgorithm.solvePopulation(testPopulacji);
+				try {
+					testPopulacji  = GeneticAlgorithm.solvePopulation(testPopulacji);
+				} catch (GeneticAlgorithmExeptions e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
-				
+//				
 //		
 		System.out.print(testPopulacji);
 		System.out.println();
@@ -105,7 +124,23 @@ public class Test {
 							   );
 		}
 		
-	}
+
 	
+
+/******************* Test tour comparator *************************/
+//		Tour tour1 = new Tour();
+//		tour1.generateRandomize();
+//		Tour tour2 = new Tour(tour1.getTour());
+//		Tour tour3 = new Tour();
+//		tour3.generateRandomize();
+//		
+//		System.out.println("Tour1 : " + tour1);
+//		System.out.println("Tour2 : " + tour2);
+//		System.out.println("Tour3 : " + tour3);
+//		System.out.println("Tour1 to Tour2: " + tour1.compareTours(tour2));
+//		System.out.println("Tour1 to Tour3: " + tour1.compareTours(tour3));
+//		
 	
-}
+		}//main
+} // class
+

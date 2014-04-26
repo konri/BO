@@ -1,4 +1,4 @@
-package hamilton;
+package hamiltonAlgorithm;
 
 public class MatrixPermission {
 

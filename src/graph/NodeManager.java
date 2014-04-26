@@ -1,4 +1,6 @@
-package hamilton;
+package graph;
+
+import hamiltonAlgorithm.MatrixPermission;
 
 import java.util.ArrayList;
 

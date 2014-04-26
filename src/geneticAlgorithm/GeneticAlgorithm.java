@@ -1,4 +1,9 @@
-package hamilton;
+package geneticAlgorithm;
+
+import exceptions.GeneticAlgorithmExeptions;
+import exceptions.GeneticAlgorithmExeptions.ErrorNumber;
+import graph.Node;
+import hamiltonAlgorithm.HamiltonAlgorithm;
 
 import java.util.Random;
 
@@ -10,12 +15,16 @@ public class GeneticAlgorithm {
 	public static int amountGoodPath = 0;
 	private static boolean isFullPopulation = false;
 
-	public static Population solvePopulation(Population population) {
+	public static Population solvePopulation(Population population) throws GeneticAlgorithmExeptions  {
 		Population tmpPopulation = new Population(population.getSize(), false);
 	
 		
+		for(int i = 0; i < amountGoodPath; i++)
+			tmpPopulation.setTour(i, population.getTour(i));
+		System.out.println(amountGoodPath);
+		
 		if (amountGoodPath < tmpPopulation.getSize()) {
-			for (int i = 0; i < population.getSize(); i++) {
+			for (int i = amountGoodPath; i < population.getSize(); i++) {
 				if (HamiltonAlgorithm.checkHamilton(population.getTour(i))) {
 					tmpPopulation.setTour(amountGoodPath, population.getTour(i));
 					amountGoodPath++;
@@ -24,24 +33,29 @@ public class GeneticAlgorithm {
 		} else {
 		System.out.print("full");
 		isFullPopulation = true;
-		tmpPopulation = population;
+		
 		}
 		
 		
 
-		// check if there are duplicates in population.
+	
+	//TODO: check if there are duplicates in population if amountGoodPath is full!!
+	
 //		int index = 0;
 //		while (index < amountGoodPath) {
-//			for (int i = index; i < amountGoodPath; i++) {
+//			for (int i = index + 1; i < amountGoodPath; i++) {
 //				// true if tours are the same
 //				if (tmpPopulation.getTour(index).compareTours(
 //						tmpPopulation.getTour(i))) {
 //					tmpPopulation.deleteTour(i);
-//					amountGoodPath--;
+//					if(amountGoodPath-- < 0)
+//						throw new GeneticAlgorithmExeptions(ErrorNumber.outOfBoundsPopulation);
+//						
+//					
 //				}
 //			}
 //		}
-		
+//		
 			
 		
 		for (int k = amountGoodPath  ; k < tmpPopulation.getSize(); k++) {

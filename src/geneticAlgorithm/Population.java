@@ -1,4 +1,4 @@
-package hamilton;
+package geneticAlgorithm;
 
 public class Population {
 	private Tour[] tours;
@@ -26,7 +26,9 @@ public class Population {
 		return tours[index];
 	}
 
-	public void setTour(int index, Tour tour) {
+	public void setTour(int index, Tour tour) throws ArrayIndexOutOfBoundsException {
+		if(index < 0 || index > amountPopulation)
+			throw new ArrayIndexOutOfBoundsException();
 		tours[index] = tour;
 	}
 	

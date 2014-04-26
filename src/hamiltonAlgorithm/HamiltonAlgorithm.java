@@ -1,4 +1,7 @@
-package hamilton;
+package hamiltonAlgorithm;
+
+import geneticAlgorithm.Tour;
+import graph.NodeManager;
 
 public class HamiltonAlgorithm {
 
@@ -8,7 +11,7 @@ public class HamiltonAlgorithm {
 				if (!MatrixPermission.getPermission(
 						NodeManager.getIdNodeByRefernce(tour.getNode(i)), 
 						NodeManager.getIdNodeByRefernce(tour.getNode(i + 1)))) {
-					System.out.println("false");
+					//System.out.println("false");
 					return false;
 				}
 			}
