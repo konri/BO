@@ -1,5 +1,7 @@
 package geneticAlgorithm;
 
+import exceptions.GeneticAlgorithmExeptions;
+import exceptions.GeneticAlgorithmExeptions.ErrorNumber;
 import graph.Node;
 import graph.NodeManager;
 
@@ -67,11 +69,11 @@ public class Tour {
 	 * return true if tours the same
 	 * return false if tours are different
 	 */
-	public boolean compareTours(Tour tour)
-	{
+	public boolean compareTours(Tour tour) throws GeneticAlgorithmExeptions{
+		if(this.getSize() != tour.getSize())
+			throw new GeneticAlgorithmExeptions(ErrorNumber.notMatchSizeOfTours);
 		
-		for(int i = 0; i < getSize(); i++)
-		{
+		for(int i = 0; i < getSize(); i++)		{
 			if(this.getNode(i) != tour.getNode(i))
 				return false;
 		}

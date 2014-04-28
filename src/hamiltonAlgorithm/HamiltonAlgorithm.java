@@ -21,7 +21,7 @@ public class HamiltonAlgorithm {
 					
 					return false;
 				}else{
-					System.out.println("true");
+					//System.out.println("true");
 					return true;
 				}			
 		}else{

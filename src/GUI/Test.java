@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class Test {
 
-	public static void main(String[] args)
+	public static void main(String[] args)throws GeneticAlgorithmExeptions
 	{
 		Node node0 = new Node();
 		NodeManager.addNode(node0);
@@ -32,6 +32,9 @@ public class Test {
 		Node node7 = new Node();
 		NodeManager.addNode(node7);
 		
+	
+		
+		
 		MatrixPermission.addPermission(0,1);
 		MatrixPermission.addPermission(0,4);
 		MatrixPermission.addPermission(1,2 );
@@ -45,14 +48,14 @@ public class Test {
 		MatrixPermission.addPermission(7,4 );
 		MatrixPermission.addPermission(5,2 );
 		MatrixPermission.addPermission(6,7 );
-//		MatrixPermission.addPermission(4,3 );
+		MatrixPermission.addPermission(4,3 );
 //		MatrixPermission.addPermission(1,3 );
 //		MatrixPermission.addPermission(2,8 );
 //		MatrixPermission.addPermission(6,4 );
 //		MatrixPermission.addPermission(8,9 );
 		//MatrixPermission.allPermission();
 		
-		System.out.print(MatrixPermission.toPrint());
+		//System.out.print(MatrixPermission.toPrint());
 		
 		//Tour newTour = new Tour();
 
@@ -99,12 +102,15 @@ public class Test {
 //		
 	
 /******************* Test population *************************/		
-		
+//		
 		System.out.println();
-		for(int i =0; i < 10; i++)
+		for(int i =0; i < 10000; i++)
 			if(!GeneticAlgorithm.isFull()){
 				try {
+					
 					testPopulacji  = GeneticAlgorithm.solvePopulation(testPopulacji);
+			
+						
 				} catch (GeneticAlgorithmExeptions e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -112,15 +118,16 @@ public class Test {
 				
 			}
 //				
-//		
-		System.out.print(testPopulacji);
-		System.out.println();
+		Population hamiltonPaths = GeneticAlgorithm.getHamiltonPaths();
 		
-		for(int i=0; i < testPopulacji.getSize(); i++)
+		System.out.println(hamiltonPaths);
+		System.out.println();
+//		
+		for(int i=0; i < GeneticAlgorithm.amountGoodPath; i++)
 		{
-			System.out.println(HamiltonAlgorithm.checkHamilton(testPopulacji.getTour(i))
+			System.out.println(HamiltonAlgorithm.checkHamilton(hamiltonPaths.getTour(i))
 								+ " : " +
-								testPopulacji.getTour(i)
+								hamiltonPaths.getTour(i)
 							   );
 		}
 		
@@ -128,19 +135,68 @@ public class Test {
 	
 
 /******************* Test tour comparator *************************/
+		Population testExist = new Population(5, true);
+		Tour tour1 = new Tour();
+		tour1.generateRandomize();
+		Tour tour2 = new Tour(tour1.getTour());
+		Tour tour3 = new Tour();
+		tour3.generateRandomize();
+		System.out.println(testExist);
+		testExist.setTour(0, tour3);
+		
+//		System.out.println("Cos: " + testExist.checkIfExists(tour2));
+		System.out.println("Tour1 : " + tour1);
+		System.out.println("Tour2 : " + tour2);
+		System.out.println("Tour3 : " + tour3);
+		System.out.println("Tour1 to Tour2: " + tour1.compareTours(tour2));
+		System.out.println("Tour1 to Tour3: " + tour1.compareTours(tour3));
+//		
+	
+/******************* Test delete tour from population*************************/
+//		Population testPopulation = new Population(10, true);
+//		System.out.println(testPopulation);
+//		
+//		try {
+//			testPopulation.deleteTour(5);
+//		} catch (GeneticAlgorithmExeptions e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println();
+//		System.out.println(testPopulation);
+		
+		/******************* Test checkDuplicate*************************/
+		Population testPopulationDuplicate = new Population(20, true);
+		
 //		Tour tour1 = new Tour();
 //		tour1.generateRandomize();
 //		Tour tour2 = new Tour(tour1.getTour());
 //		Tour tour3 = new Tour();
 //		tour3.generateRandomize();
+////		testPopulationDuplicate.setTour(0, tour1);
+////		testPopulationDuplicate.setTour(5, tour2);
+////		testPopulationDuplicate.setTour(7, tour2);
+//		testPopulationDuplicate.setTour(2, tour3);
+//		testPopulationDuplicate.setTour(9, tour3);
+//	System.out.println(testPopulationDuplicate);
 //		
-//		System.out.println("Tour1 : " + tour1);
-//		System.out.println("Tour2 : " + tour2);
-//		System.out.println("Tour3 : " + tour3);
-//		System.out.println("Tour1 to Tour2: " + tour1.compareTours(tour2));
-//		System.out.println("Tour1 to Tour3: " + tour1.compareTours(tour3));
-//		
-	
+//		boolean duplicate = false;
+//		try {
+//			duplicate = testPopulationDuplicate.checkPresenceDuplicates();
+//		} catch (GeneticAlgorithmExeptions e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		if(duplicate){
+//			System.out.println("is duplicates");
+//			try {
+//			System.out.println("How many: "+testPopulationDuplicate.removeDuplicates());
+//			} catch (GeneticAlgorithmExeptions e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		System.out.println(testPopulationDuplicate);
 		}//main
 } // class
 
