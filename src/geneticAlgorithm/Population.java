@@ -69,9 +69,11 @@ public class Population {
 	 * return true -- exist duplicates 
 	 * return false -- no exist duplcates. 
 	 */
-	public boolean checkPresenceDuplicates() throws GeneticAlgorithmExeptions{
-		for(int mainIndex = 0; mainIndex < getSize() - 1; mainIndex++){
-			for(int insideIndex = mainIndex + 1; insideIndex < getSize(); insideIndex++){
+	public boolean checkPresenceDuplicates(int amount) throws GeneticAlgorithmExeptions{
+		if(amount == 0)
+			amount = getSize();
+		for(int mainIndex = 0; mainIndex < amount - 1; mainIndex++){
+			for(int insideIndex = mainIndex + 1; insideIndex < amount; insideIndex++){
 				if( getTour(mainIndex).compareTours(getTour(insideIndex)) ){
 					return true;
 				}

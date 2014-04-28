@@ -103,34 +103,34 @@ public class Test {
 	
 /******************* Test population *************************/		
 //		
-		System.out.println();
-		for(int i =0; i < 10000; i++)
-			if(!GeneticAlgorithm.isFull()){
-				try {
-					
-					testPopulacji  = GeneticAlgorithm.solvePopulation(testPopulacji);
-			
-						
-				} catch (GeneticAlgorithmExeptions e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
+//		System.out.println();
+//		for(int i =0; i < 10000; i++)
+//			if(!GeneticAlgorithm.isFull()){
+//				try {
+//					
+//					testPopulacji  = GeneticAlgorithm.solvePopulation(testPopulacji);
+//			
+//						
+//				} catch (GeneticAlgorithmExeptions e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 //				
-		Population hamiltonPaths = GeneticAlgorithm.getHamiltonPaths();
-		
-		System.out.println(hamiltonPaths);
-		System.out.println();
+//			}
+////				
+//		Population hamiltonPaths = GeneticAlgorithm.getHamiltonPaths();
 //		
-		for(int i=0; i < GeneticAlgorithm.amountGoodPath; i++)
-		{
-			System.out.println(HamiltonAlgorithm.checkHamilton(hamiltonPaths.getTour(i))
-								+ " : " +
-								hamiltonPaths.getTour(i)
-							   );
-		}
-		
+//		System.out.println(hamiltonPaths);
+//		System.out.println();
+////		
+//		for(int i=0; i < GeneticAlgorithm.amountGoodPath; i++)
+//		{
+//			System.out.println(HamiltonAlgorithm.checkHamilton(hamiltonPaths.getTour(i))
+//								+ " : " +
+//								hamiltonPaths.getTour(i)
+//							   );
+//		}
+//		
 
 	
 

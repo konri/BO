@@ -60,31 +60,29 @@ public class MatrixPermission {
 	}
 	
 	public static String toPrint() {
-		String tmpString = "____________________________\n";
+		String tmpString = "____________________________\r\n";
 		for (int i = 0; i < matrixPermission.length; i++) {
 			tmpString += i + "|";
 			for (int j = 0; j < matrixPermission.length; j++) {
 				tmpString += "|" + matrixPermission[i][j];
 			}
-			tmpString += "\n";
+			tmpString += "\r\n";
 		}
 		return tmpString;
 
 	}
+	
 	//TODO:
-	public static void randomPermission()
-	{
+	public static void randomPermission(){
 		
 	}
 	
-	public static void allPermission()
-	{
+	public static void allPermission()	{
 		for(int i = 0; i < matrixPermission.length; i++)
 			for(int j=0; j< matrixPermission[i].length; j++)
-			{
 				if(i!=j)
 					addPermission(i, j);
-			}
+
 	}
 	
 	
