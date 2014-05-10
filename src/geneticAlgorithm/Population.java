@@ -2,6 +2,7 @@ package geneticAlgorithm;
 
 import exceptions.GeneticAlgorithmExeptions;
 import exceptions.GeneticAlgorithmExeptions.ErrorNumber;
+import geneticAlgorithm.Tour.MethodFitness;
 
 public class Population {
 	private Tour[] tours;
@@ -94,7 +95,14 @@ public class Population {
 		}
 	return howManyDuplicates;
 	}
-	
+	public Tour getFittest(MethodFitness method){
+		Tour tmp = tours[0];
+		for(int i = 1; i < getSize(); i++){
+			if(tmp.getFittness(method) <= getTour(i).getFittness(method))
+				tmp = getTour(i);
+		}
+		return tmp;
+	}
 	public String toString() {
 		String tmp = "";
 		for (int i = 0; i < amountPopulation; i++)

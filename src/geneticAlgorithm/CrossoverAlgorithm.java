@@ -13,7 +13,7 @@ public class CrossoverAlgorithm {
 
 		do {
 
-			startPos = rand.nextInt(parent1.getSize()); // randome in [0,n)
+			startPos = rand.nextInt(parent1.getSize()); // random in [0,n)
 			endPos = rand.nextInt(parent1.getSize());
 
 		} while (startPos == endPos);

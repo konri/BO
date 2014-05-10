@@ -1,19 +1,25 @@
 package hamiltonAlgorithm;
 
+import java.util.Random;
+
 public class MatrixPermission {
 
 	private static boolean isReady = false;
 	private static int[][] matrixPermission = new int[10][10];
-	
+	private static int amountNodes = 0;
+	private static Random rand = new Random();
+
 	public static void addNode(int lastIndex) {
 		if (lastIndex > matrixPermission.length)
 			expandMatrix();
-
+		amountNodes++;
 	}
 
 	public static void addPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
 		if (fromNode > matrixPermission.length || fromNode < 0
-			 || toNode > matrixPermission.length || toNode < 0) {
+				|| toNode > matrixPermission.length || toNode < 0
+				|| fromNode > amountNodes
+				|| toNode > amountNodes) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 
@@ -24,7 +30,7 @@ public class MatrixPermission {
 
 	public static boolean getPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
 		if (fromNode > matrixPermission.length || fromNode < 0
-	         || toNode > matrixPermission.length || toNode < 0) {
+				|| toNode > matrixPermission.length || toNode < 0) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 
@@ -48,22 +54,41 @@ public class MatrixPermission {
 		matrixPermission = tmp;
 
 	}
-	
-	public static void setReady()
-	{
+
+	public static void setReady() {
 		isReady = true;
 	}
-	
-	public static boolean getReady()
-	{
+
+	public static boolean getReady() {
 		return isReady;
+	}
+	
+	public static int getAmountNodes()
+	{
+		return amountNodes;				
+	}
+	public static void randomPermission() {
+		for(int i = 0; i < getAmountNodes(); i++)
+			for(int j = 0; j < getAmountNodes(); j++){
+				if(rand.nextInt(2) == 1)
+					if(i!=j)
+						addPermission(i, j);
+			}
+	}
+
+	public static void allPermission() {
+		for (int i = 0; i < getAmountNodes(); i++)
+			for (int j = 0; j < getAmountNodes(); j++)
+				if (i != j)
+					addPermission(i, j);
+
 	}
 	
 	public static String toPrint() {
 		String tmpString = "____________________________\r\n";
-		for (int i = 0; i < matrixPermission.length; i++) {
+		for (int i = 0; i < getAmountNodes(); i++) {
 			tmpString += i + "|";
-			for (int j = 0; j < matrixPermission.length; j++) {
+			for (int j = 0; j < getAmountNodes(); j++) {
 				tmpString += "|" + matrixPermission[i][j];
 			}
 			tmpString += "\r\n";
@@ -71,20 +96,5 @@ public class MatrixPermission {
 		return tmpString;
 
 	}
-	
-	//TODO:
-	public static void randomPermission(){
-		
-	}
-	
-	public static void allPermission()	{
-		for(int i = 0; i < matrixPermission.length; i++)
-			for(int j=0; j< matrixPermission[i].length; j++)
-				if(i!=j)
-					addPermission(i, j);
-
-	}
-	
-	
 
 }

@@ -4,13 +4,21 @@ import exceptions.GeneticAlgorithmExeptions;
 import exceptions.GeneticAlgorithmExeptions.ErrorNumber;
 import graph.Node;
 import graph.NodeManager;
+import hamiltonAlgorithm.HamiltonAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Tour {
-	private ArrayList<Node> tour = new ArrayList<Node>();
 
+public class Tour {
+	public enum MethodFitness{
+		getAllConnect,
+		getAfterAnotherConnect
+	}
+	private ArrayList<Node> tour = new ArrayList<Node>();
+	private int fitness = 0;
+	private MethodFitness method = MethodFitness.getAllConnect;
+	
 	public Tour() {
 		/*
 		 * we create tour of nulls because of crossword algorithm
@@ -40,6 +48,8 @@ public class Tour {
 	 */
 	public void setNode(int index, Node node) {
 		tour.set(index, node);
+		fitness = 0;
+		method = MethodFitness.getAllConnect;
 	}
 
 	/*
@@ -65,6 +75,44 @@ public class Tour {
 		return tour.contains(node);
 	}
 	
+	/*
+	 * Get number of all correct connection between two Nodes
+	 * if no connection is return -1 
+	 */
+	public int getAllNumberConnections(){
+		int tmp = HamiltonAlgorithm.getAllAmountGoodConnections(this); 
+		return  tmp != 0 ? tmp : -1;
+	}
+	
+	/*
+	 * Get number of correct connection between two Nodes but it must be after another 
+	 * if has not connection between Nodes function stop and return actual amount
+	 * if no connection is return -1 
+	 */
+	public int getAfterAnotherNumberConnections(){
+		int tmp = HamiltonAlgorithm.getAfterAnotherAmountGoodConnections(this);
+		return  tmp != 0 ? tmp : -1;
+	}
+	
+	public int getFittness(MethodFitness method){
+		if(fitness == 0){
+			if(method == MethodFitness.getAfterAnotherConnect){
+				fitness = getAfterAnotherNumberConnections();
+				this.method = method;
+			}else{
+				fitness = getAllNumberConnections();
+				this.method = method;
+			}
+		}else{
+			if(this.method != method){
+			
+				fitness = 0;
+				fitness = getFittness(method);
+			}
+		}
+		
+	return fitness;
+	}
 	/*
 	 * return true if tours the same
 	 * return false if tours are different

@@ -21,10 +21,8 @@ public class MutationAlgorithm {
 		Random rand = new Random();
 		for (int i = 0; i < tour.getSize(); i++) {
 			if (rand.nextDouble() < mutationRate) {
-				int randomSecond = rand.nextInt(tour.getSize());// generate
-																// second index
-																// of swaping
-																// node.
+				int randomSecond = rand.nextInt(tour.getSize());// generate second index of swapping node.
+				
 				Node node1 = tour.getNode(i);
 				Node node2 = tour.getNode(randomSecond);
 

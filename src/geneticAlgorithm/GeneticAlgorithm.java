@@ -1,31 +1,35 @@
 package geneticAlgorithm;
 
 import exceptions.GeneticAlgorithmExeptions;
-import exceptions.GeneticAlgorithmExeptions.ErrorNumber;
-import graph.Node;
+import geneticAlgorithm.Tour.MethodFitness;
 import hamiltonAlgorithm.HamiltonAlgorithm;
 
 import java.util.Random;
 
-import javax.swing.text.StyleContext.SmallAttributeSet;
 
 public class GeneticAlgorithm {
 
-	
 	private int amountGoodPath = 0;
+	private int tournamentSize = 10;
+	private MethodFitness methodFitness;
 	private boolean isFullPopulation = false;
 	private Population correctPathPopulation;
 	private MutationAlgorithm mutation;
 
-	
-	public GeneticAlgorithm(int populationSize, double mutationSeek){
-		correctPathPopulation = new Population(populationSize, false);
-		mutation = new MutationAlgorithm(mutationSeek);		
+	/*
+	 * Amount of population with correct paths
+	 */
+	public GeneticAlgorithm(int populationSizeCorrectPath, double mutationSeek, int tournamentSize, MethodFitness methodFitness){
+		correctPathPopulation = new Population(populationSizeCorrectPath, false);
+		mutation = new MutationAlgorithm(mutationSeek);
+		this.tournamentSize = tournamentSize; 
+		this.methodFitness = methodFitness;
 	}
 	
 	public GeneticAlgorithm(){
 		correctPathPopulation = new Population(10, false);
 		mutation = new MutationAlgorithm();
+		methodFitness = MethodFitness.getAllConnect;
 	}
 	
 	public Population solvePopulation(Population population) throws GeneticAlgorithmExeptions {
@@ -40,7 +44,7 @@ public class GeneticAlgorithm {
 			if(HamiltonAlgorithm.checkHamilton(population.getTour(i))){
 				if(!correctPathPopulation.checkIfExists(population.getTour(i),amountGoodPath)){
 					correctPathPopulation.setTour(amountGoodPath, population.getTour(i));
-					if(amountGoodPath++ > correctPathPopulation.getSize() - 1){
+					if(++amountGoodPath > correctPathPopulation.getSize() - 1){
 						isFullPopulation = true;
 						return tmpPopulation;
 					}
@@ -48,17 +52,21 @@ public class GeneticAlgorithm {
 			}
 		}
 	
+		/*
+		 * Add the best tour from old population for the first place
+		 **/
+		tmpPopulation.setTour(0, population.getFittest(methodFitness));
 		
-		for (int k = 0; k < tmpPopulation.getSize(); k++) {
+		for (int k = 1; k < tmpPopulation.getSize(); k++) {
 			// get randomly parent1 and parent 2 from old population
-			Tour parent1 = getRandomTour(population);
-			Tour parent2 = getRandomTour(population);
+			Tour parent1 = getTournamentTour(population);
+			Tour parent2 = getTournamentTour(population);
 			// create child with crossover
 			Tour child = CrossoverAlgorithm.crossOver(parent1, parent2);
 			// set new tour to new population
 			tmpPopulation.setTour(k, child);
 		}
-		for (int k = 0; k < tmpPopulation.getSize(); k++)
+		for (int k = 1; k < tmpPopulation.getSize(); k++)
 			mutation.mutation(tmpPopulation.getTour(k));
 
 		return tmpPopulation;
@@ -86,11 +94,16 @@ public class GeneticAlgorithm {
 	}
 	
 	/*
-	 * Get random tour from population
+	 * Get random tour from population 
 	 */
-	private Tour getRandomTour(Population population) {
+	private Tour getTournamentTour(Population population) {
 		Random rand = new Random();
-		return population.getTour(rand.nextInt(population.getSize()));
+		Population tournament = new Population(tournamentSize, false);
+		for(int i = 0; i < tournament.getSize(); i++ ){
+			tournament.setTour(i, population.getTour(rand.nextInt(population.getSize())));
+		}
+		return tournament.getFittest(methodFitness);
+	
 	}
 
 	

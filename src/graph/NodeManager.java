@@ -23,7 +23,7 @@ public class NodeManager {
 	 */
 	public static void addNode(Node node) {
 		containsNode.add(node);
-		MatrixPermission.addNode(getSizeOfNodes());  // TODO: optimization we can add to check there if matrix can hanlde more perrmision. 
+		MatrixPermission.addNode(getSizeOfNodes());  // TODO: optimization we can add to check there if matrix can handle more permissions. 
 	}
 
 	/*
