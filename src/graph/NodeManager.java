@@ -15,35 +15,44 @@ import java.util.ArrayList;
  * 
  */
 public class NodeManager {
+	public static NodeManager staticManager = null; 
+	private  ArrayList<Node> containsNode = null; // hold our nodes
+	private MatrixPermission matrix = null;
+	
 
-	private static ArrayList<Node> containsNode = new ArrayList<Node>(); // hold our nodes
-
+	public NodeManager(MatrixPermission matrix){
+		containsNode = new ArrayList<Node>();
+		this.matrix = matrix;
+		staticManager = this;
+	}
+		
+	
 	/*
 	 * add Node to main list
 	 */
-	public static void addNode(Node node) {
+	public void addNode(Node node) {
 		containsNode.add(node);
-		MatrixPermission.addNode(getSizeOfNodes());  // TODO: optimization we can add to check there if matrix can handle more permissions. 
+		matrix.addNode(getSizeOfNodes());  // TODO: optimization we can add to check there if matrix can handle more permissions. 
 	}
 
 	/*
 	 * Get Node reference by index.
 	 */
-	public static Node getReferenceNodeByIndex(int index) {
+	public Node getReferenceNodeByIndex(int index) {
 		return containsNode.get(index);
 	}
 
 	/*
 	 * Get integer id of node.
 	 */
-	public static int getIdNodeByRefernce(Node node) {
+	public int getIdNodeByRefernce(Node node) {
 		return containsNode.indexOf(node);
 	}
 
 	/*
 	 * Get size of list.
 	 */
-	public static int getSizeOfNodes() {
+	public int getSizeOfNodes() {
 		return containsNode.size();
 	}
 
@@ -51,9 +60,9 @@ public class NodeManager {
 	/*
 	 * add permission to current path
 	 */
-	public static void addPermission(int fromNode, int toNode) {
+	public void addPermission(int fromNode, int toNode) {
 		try {
-			MatrixPermission.addPermission(fromNode, toNode);
+			matrix.addPermission(fromNode, toNode);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
@@ -62,9 +71,9 @@ public class NodeManager {
 	/*
 	 * get permission to current path
 	 */
-	public static boolean getPermission(int fromNode, int toNode) {
+	public boolean getPermission(int fromNode, int toNode) {
 		try {
-			return MatrixPermission.getPermission(fromNode, toNode);
+			return matrix.getPermission(fromNode, toNode);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new ArrayIndexOutOfBoundsException();
 		}

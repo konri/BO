@@ -23,9 +23,10 @@ public class Tour {
 		/*
 		 * we create tour of nulls because of crossword algorithm
 		 */
-		for (int i = 0; i < NodeManager.getSizeOfNodes(); i++) {
+		for (int i = 0; i < NodeManager.staticManager.getSizeOfNodes(); i++) {
 			tour.add(null);
 		}
+		
 	}
 
 	
@@ -37,8 +38,8 @@ public class Tour {
 	 * Generate randomize tour of nodes
 	 */
 	public void generateRandomize() {
-		for (int i = 0; i < NodeManager.getSizeOfNodes(); i++) {
-			setNode(i, NodeManager.getReferenceNodeByIndex(i));
+		for (int i = 0; i < NodeManager.staticManager.getSizeOfNodes(); i++) {
+			setNode(i, NodeManager.staticManager.getReferenceNodeByIndex(i));
 		}
 		Collections.shuffle(tour);
 	}
@@ -132,9 +133,9 @@ public class Tour {
 		String tmp ="";
 		for(int i= 0; i < getSize(); i++)
 			if(i < getSize() - 1)
-				tmp += NodeManager.getIdNodeByRefernce(getNode(i)) + "=>";
+				tmp += NodeManager.staticManager.getIdNodeByRefernce(getNode(i)) + "=>";
 			else
-				tmp += NodeManager.getIdNodeByRefernce(getNode(i)) + "\n";
+				tmp += NodeManager.staticManager.getIdNodeByRefernce(getNode(i)) + "\n";
 		
 	return tmp;
 	}

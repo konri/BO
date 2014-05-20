@@ -4,18 +4,27 @@ import java.util.Random;
 
 public class MatrixPermission {
 
-	private static boolean isReady = false;
-	private static int[][] matrixPermission = new int[10][10];
-	private static int amountNodes = 0;
-	private static Random rand = new Random();
-
-	public static void addNode(int lastIndex) {
+	private boolean isReady = false;
+	private int[][] matrixPermission;;
+	private int amountNodes = 0;
+	private Random rand = new Random();
+	
+	public MatrixPermission(int length){
+		matrixPermission = new int[length][length];
+		
+	}
+	public MatrixPermission(){
+		matrixPermission = new int[10][10];
+		
+	}	
+	
+	public void addNode(int lastIndex) {
 		if (lastIndex > matrixPermission.length)
 			expandMatrix();
 		amountNodes++;
 	}
 
-	public static void addPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
+	public void addPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
 		if (fromNode > matrixPermission.length || fromNode < 0
 				|| toNode > matrixPermission.length || toNode < 0
 				|| fromNode > amountNodes
@@ -28,7 +37,7 @@ public class MatrixPermission {
 
 	}
 
-	public static boolean getPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
+	public boolean getPermission(int fromNode, int toNode) throws ArrayIndexOutOfBoundsException {
 		if (fromNode > matrixPermission.length || fromNode < 0
 				|| toNode > matrixPermission.length || toNode < 0) {
 			throw new ArrayIndexOutOfBoundsException();
@@ -40,12 +49,11 @@ public class MatrixPermission {
 			return false;
 	}
 
-	private static void expandMatrix() {
+	private void expandMatrix() {
 		int[][] tmp = new int[matrixPermission.length + 10][matrixPermission.length + 10];
 		for (int i = 0; i < tmp.length; i++)
 			for (int j = 0; j < tmp.length; j++)
-				tmp[i][j] = 0; // TODO: czy dac tutaj -1 dla nie istniejacych
-								// node?
+				tmp[i][j] = 0;
 
 		for (int i = 0; i < matrixPermission.length; i++)
 			for (int j = 0; j < matrixPermission.length; j++)
@@ -55,19 +63,20 @@ public class MatrixPermission {
 
 	}
 
-	public static void setReady() {
+	public void setReady() {
 		isReady = true;
 	}
 
-	public static boolean getReady() {
+	public boolean getReady() {
 		return isReady;
 	}
 	
-	public static int getAmountNodes()
+	public int getAmountNodes()
 	{
 		return amountNodes;				
 	}
-	public static void randomPermission() {
+	
+	public void randomPermission() {
 		for(int i = 0; i < getAmountNodes(); i++)
 			for(int j = 0; j < getAmountNodes(); j++){
 				if(rand.nextInt(2) == 1)
@@ -76,7 +85,7 @@ public class MatrixPermission {
 			}
 	}
 
-	public static void allPermission() {
+	public void allPermission() {
 		for (int i = 0; i < getAmountNodes(); i++)
 			for (int j = 0; j < getAmountNodes(); j++)
 				if (i != j)
@@ -84,7 +93,7 @@ public class MatrixPermission {
 
 	}
 	
-	public static String toPrint() {
+	public String toString() {
 		String tmpString = "____________________________\r\n";
 		for (int i = 0; i < getAmountNodes(); i++) {
 			tmpString += i + "|";

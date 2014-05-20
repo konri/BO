@@ -5,19 +5,23 @@ import graph.NodeManager;
 
 public class HamiltonAlgorithm {
 
+	private static MatrixPermission matrix = null;
+	public static void setMatrixPermission(MatrixPermission _matrix){
+		matrix = _matrix;
+	}
 	public static boolean checkHamilton(Tour tour) {
 		
 			for (int i = 0; i < tour.getSize() - 1; i++) {
-				if (!MatrixPermission.getPermission(
-						NodeManager.getIdNodeByRefernce(tour.getNode(i)),
-						NodeManager.getIdNodeByRefernce(tour.getNode(i + 1)))) {
+				if (!matrix.getPermission(
+						NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i)),
+						NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i + 1)))) {
 					// System.out.println("false");
 				return false;
 				}
 			}
-			if (!MatrixPermission.getPermission(NodeManager
+			if (!matrix.getPermission(NodeManager.staticManager
 					.getIdNodeByRefernce(tour.getNode(tour.getSize() - 1)),
-					NodeManager.getIdNodeByRefernce(tour.getNode(0)))) {
+					NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(0)))) {
 				return false;
 
 			} else {
@@ -37,14 +41,14 @@ public class HamiltonAlgorithm {
 		int amount = 0;
 		
 		for (int i = 0; i < tour.getSize() - 1; i++) 
-			if (MatrixPermission.getPermission(
-					NodeManager.getIdNodeByRefernce(tour.getNode(i)),
-					NodeManager.getIdNodeByRefernce(tour.getNode(i + 1)))) 
+			if (matrix.getPermission(
+					NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i)),
+					NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i + 1)))) 
 				amount++;
 		
-		if(MatrixPermission.getPermission(
-				NodeManager.getIdNodeByRefernce(tour.getNode(tour.getSize() - 1 )), 
-				NodeManager.getIdNodeByRefernce(tour.getNode(0))))
+		if(matrix.getPermission(
+				NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(tour.getSize() - 1 )), 
+				NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(0))))
 			amount++;
 			
 		return amount;
@@ -61,17 +65,17 @@ public class HamiltonAlgorithm {
 	public static int getAfterAnotherAmountGoodConnections(Tour tour){
 		int amount = 0;
 		for(int i = 0; i < tour.getSize() - 1; i++){
-			if(MatrixPermission.getPermission(
-					NodeManager.getIdNodeByRefernce(tour.getNode(i)),
-					NodeManager.getIdNodeByRefernce(tour.getNode(i+  1)))){
+			if(matrix.getPermission(
+					NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i)),
+					NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(i+  1)))){
 				amount++;
 			}else{
 				return amount;
 			}
 		}
-		if(MatrixPermission.getPermission(
-				NodeManager.getIdNodeByRefernce(tour.getNode(tour.getSize() - 1)), 
-				NodeManager.getIdNodeByRefernce(tour.getNode(0))))
+		if(matrix.getPermission(
+				NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(tour.getSize() - 1)), 
+				NodeManager.staticManager.getIdNodeByRefernce(tour.getNode(0))))
 			amount++;
 		return amount;
 	}

@@ -18,73 +18,77 @@ public class NewTest {
 		/*
 		 * Create objects of nodes
 		 */
+		
+		MatrixPermission matrix = new MatrixPermission();
+		NodeManager nodeManager = new NodeManager(matrix);
+		
 		Node node0 = new Node();
-		NodeManager.addNode(node0);
+		nodeManager.addNode(node0);
 		Node node1 = new Node();
-		NodeManager.addNode(node1);
+		nodeManager.addNode(node1);
 		Node node2 = new Node();
-		NodeManager.addNode(node2);
+		nodeManager.addNode(node2);
 		Node node3 = new Node();
-		NodeManager.addNode(node3);
+		nodeManager.addNode(node3);
 		Node node4 = new Node();
-		NodeManager.addNode(node4);
+		nodeManager.addNode(node4);
 		Node node5 = new Node();
-		NodeManager.addNode(node5);
+		nodeManager.addNode(node5);
 		Node node6 = new Node();
-		NodeManager.addNode(node6);
+		nodeManager.addNode(node6);
 		Node node7 = new Node();
-		NodeManager.addNode(node7);
+		nodeManager.addNode(node7);
 
 		/*
 		 * Add some Permission to above nodes.
 		 */
 
-//		MatrixPermission.addPermission(0, 1);
-//		MatrixPermission.addPermission(0, 4);
-//		MatrixPermission.addPermission(1, 2);
-//		MatrixPermission.addPermission(2, 4);
-//		MatrixPermission.addPermission(2, 3);
-//		MatrixPermission.addPermission(4, 3);
-//		MatrixPermission.addPermission(4, 6);
-//		MatrixPermission.addPermission(3, 6);
-//		MatrixPermission.addPermission(3, 5);
-//		MatrixPermission.addPermission(5, 7);
-//		MatrixPermission.addPermission(7, 4);
-//		MatrixPermission.addPermission(5, 2);
-//		MatrixPermission.addPermission(6, 7);
-//		MatrixPermission.addPermission(4, 3);
+//		matrix.addPermission(0, 1);
+//		matrix.addPermission(0, 4);
+//		matrix.addPermission(1, 2);
+//		matrix.addPermission(2, 4);
+//		matrix.addPermission(2, 3);
+//		matrix.addPermission(4, 3);
+//		matrix.addPermission(4, 6);
+//		matrix.addPermission(3, 6);
+//		matrix.addPermission(3, 5);
+//		matrix.addPermission(5, 7);
+//		matrix.addPermission(7, 4);
+//		matrix.addPermission(5, 2);
+//		matrix.addPermission(6, 7);
 		
-		MatrixPermission.allPermission();
-
+	//	matrix.
+		matrix.randomPermission();
 		System.out.println("Permission matrix: ");
-		System.out.println(MatrixPermission.toPrint()); // print of matrix
+		System.out.println(matrix); // print of matrix
 														// permission
 
-		MatrixPermission.setReady(); // setReady to true. We set that program is
+		matrix.setReady(); // setReady to true. We set that program is
 										// ready to start.
-
+		HamiltonAlgorithm.setMatrixPermission(matrix);
+	
+		
+//		System.out.println(testPopulacji.getTour(7));
+//		System.out.println(HamiltonAlgorithm.getAllAmountGoodConnections(testPopulacji.getTour(7)));
+//		System.out.println(HamiltonAlgorithm.getAfterAnotherAmountGoodConnections(testPopulacji.getTour(7)));
+//		
+//		System.out.println("All: " + testPopulacji.getTour(7).getFittness(MethodFitness.getAllConnect) + 
+//							"After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
+//		
+//		System.out.println("After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
+//
+//		System.out.println("All: " + testPopulacji.getTour(7).getFittness(MethodFitness.getAllConnect) +  
+//						   "After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
+//		Tour tmpAA = testPopulacji.getFittest(MethodFitness.getAfterAnotherConnect);
+//		Tour tmpAll = testPopulacji.getFittest(MethodFitness.getAllConnect);
+//		
+//		System.out.println("AA: "+ tmpAA.getFittness(MethodFitness.getAfterAnotherConnect) + " All: " + tmpAll.getFittness(MethodFitness.getAllConnect));
+//		
 		Population testPopulacji = new Population(100, true);
-		
-		System.out.println(testPopulacji.getTour(7));
-		System.out.println(HamiltonAlgorithm.getAllAmountGoodConnections(testPopulacji.getTour(7)));
-		System.out.println(HamiltonAlgorithm.getAfterAnotherAmountGoodConnections(testPopulacji.getTour(7)));
-		
-		System.out.println("All: " + testPopulacji.getTour(7).getFittness(MethodFitness.getAllConnect) + 
-							"After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
-		
-		System.out.println("After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
-
-		System.out.println("All: " + testPopulacji.getTour(7).getFittness(MethodFitness.getAllConnect) +  
-						   "After: "+ testPopulacji.getTour(7).getFittness(MethodFitness.getAfterAnotherConnect));
-		Tour tmpAA = testPopulacji.getFittest(MethodFitness.getAfterAnotherConnect);
-		Tour tmpAll = testPopulacji.getFittest(MethodFitness.getAllConnect);
-		
-		System.out.println("AA: "+ tmpAA.getFittness(MethodFitness.getAfterAnotherConnect) + " All: " + tmpAll.getFittness(MethodFitness.getAllConnect));
-		
 		GeneticAlgorithm genetic = new GeneticAlgorithm(10,0.1,5,MethodFitness.getAllConnect);
 		/******************* Test population *************************/
 		System.out.println();
-		for (int i = 0; i < 1000; i++)
+		for (int i = 0; i < 100000; i++)
 			if (!genetic.isFull()) {
 				try {
 					testPopulacji = genetic.solvePopulation(testPopulacji);

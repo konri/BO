@@ -34,21 +34,21 @@ public class Test {
 		
 	
 		
-		
-		MatrixPermission.addPermission(0,1);
-		MatrixPermission.addPermission(0,4);
-		MatrixPermission.addPermission(1,2 );
-		MatrixPermission.addPermission(2,4 );
-		MatrixPermission.addPermission(2,3 );
-		MatrixPermission.addPermission(4,3 );
-		MatrixPermission.addPermission(4,6);
-		MatrixPermission.addPermission(3,6 );
-		MatrixPermission.addPermission(3,5 );
-		MatrixPermission.addPermission(5,7 );
-		MatrixPermission.addPermission(7,4 );
-		MatrixPermission.addPermission(5,2 );
-		MatrixPermission.addPermission(6,7 );
-		MatrixPermission.addPermission(4,3 );
+//		
+//		MatrixPermission.addPermission(0,1);
+//		MatrixPermission.addPermission(0,4);
+//		MatrixPermission.addPermission(1,2 );
+//		MatrixPermission.addPermission(2,4 );
+//		MatrixPermission.addPermission(2,3 );
+//		MatrixPermission.addPermission(4,3 );
+//		MatrixPermission.addPermission(4,6);
+//		MatrixPermission.addPermission(3,6 );
+//		MatrixPermission.addPermission(3,5 );
+//		MatrixPermission.addPermission(5,7 );
+//		MatrixPermission.addPermission(7,4 );
+//		MatrixPermission.addPermission(5,2 );
+//		MatrixPermission.addPermission(6,7 );
+//		MatrixPermission.addPermission(4,3 );
 //		MatrixPermission.addPermission(1,3 );
 //		MatrixPermission.addPermission(2,8 );
 //		MatrixPermission.addPermission(6,4 );
@@ -68,7 +68,7 @@ public class Test {
 //		newTour.setNode(6, node1);
 //		newTour.setNode(7, node0);
 		
-		MatrixPermission.setReady();
+//		MatrixPermission.setReady();
 		
 //		newTour.generateRandomize();
 //		
